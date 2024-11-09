@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Resume Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMPPLQyldd6ld5ZTYIOjy57dD7p/j3oEwYGO7o" crossorigin="anonymous">
+    <style>
+        /* CSS for Enhanced UI/UX */
+        * {
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f4f6fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            max-width: 700px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(83, 79, 79, 0.15);
+            overflow: hidden;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #899fb9, #203c4e);
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #494848;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            cursor: pointer;
+            padding: 15px;
+            background-color: #244264;
+            color: #ffffffd2;
+            margin-top: 15px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .section-header:hover {
+            background-color: #224869;
+        }
+
+        .section-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            background-color: #fafafa;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #414040;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-label .icon {
+            margin-right: 8px;
+        }
+
+        input, textarea, button {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #234163;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            background-color: #142335;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            padding: 15px;
+        }
+
+        button:hover {
+            background-color: #142738;
+            transform: scale(1.02);
+        }
+
+        .resume-preview {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #f9f9f9;
+            border-top: 3px solid #192a3d;
+            border-radius: 8px;
+            display: none;
+            animation: slideDown 0.4s ease;
+            text-align: center;
+        }
+
+        #preview-profile-pic {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        #print-btn {
+            margin-top: 20px;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+        }
+
+        .error {
+            color: #d83c37;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Creative Resume Builder</h2>
+            <p>Follow each step to create a standout resume with a professional preview.</p>
+        </div>
+        
+        <div class="content">
+            <h1>Start Building Your Resume</h1>
+            <div class="section-header" onclick="toggleSection('basic-info')">
+                Basic Information <span>&#9660;</span>
+            </div>
+            <div class="section-content" id="basic-info">
+                <label class="form-label"><i class="fas fa-user icon"></i> Full Name</label>
+                <input type="text" id="name" required>
+                <div class="error" id="name-error">This field is required.</div>
+                
+                <label class="form-label"><i class="fas fa-envelope icon"></i> Email</label>
+                <input type="email" id="email" required>
+                <div class="error" id="email-error">Please enter a valid email.</div>
+
+                <label class="form-label"><i class="fas fa-phone icon"></i> Phone</label>
+                <input type="tel" id="phone" required>
+                <div class="error" id="phone-error">This field is required.</div>
+
+                <label class="form-label"><i class="fas fa-city icon"></i> City</label>
+                <input type="text" id="city" required>
+                <div class="error" id="city-error">This field is required.</div>
+
+                <label class="form-label"><i class="fas fa-camera icon"></i> Profile Picture</label>
+                <input type="file" id="profile-pic" accept="image/*" onchange="loadProfilePic(event)">
+                
+                <!-- Social Media Links with Icons -->
+                <label class="form-label"><i class="fab fa-linkedin icon"></i> LinkedIn Profile</label>
+                <input type="url" id="linkedin" placeholder="https://www.linkedin.com/in/username">
+                
+                <label class="form-label"><i class="fab fa-github icon"></i> GitHub Profile</label>
+                <input type="url" id="github" placeholder="https://github.com/username">
+                
+                <label class="form-label"><i class="fab fa-facebook icon"></i> Facebook Profile</label>
+                <input type="url" id="facebook" placeholder="https://www.facebook.com/username">
+                
+                <label class="form-label"><i class="fab fa-instagram icon"></i> Instagram Profile</label>
+                <input type="url" id="instagram" placeholder="https://www.instagram.com/username">
+            </div>
+            
+            <button type="button" onclick="generateResume()">Generate Resume</button>
+            
+            <div id="resume-preview" class="resume-preview">
+                <img id="preview-profile-pic" src="" alt="Profile Picture" style="display: none;">
+                <h2>Resume Preview</h2>
+                <p><strong>Name:</strong> <span id="preview-name"></span></p>
+                <p><strong>Email:</strong> <span id="preview-email"></span></p>
+                <p><strong>Phone:</strong> <span id="preview-phone"></span></p>
+                <p><strong>City:</strong> <span id="preview-city"></span></p>
+                <p><strong>LinkedIn:</strong> <span id="preview-linkedin"></span></p>
+                <p><strong>GitHub:</strong> <span id="preview-github"></span></p>
+                <p><strong>Facebook:</strong> <span id="preview-facebook"></span></p>
+                <p><strong>Instagram:</strong> <span id="preview-instagram"></span></p>
+            </div>
+            <button id="print-btn" onclick="printResume()">Download Resume as PDF</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.style.display = section.style.display === "block" ? "none" : "block";
+        }
+
+        function validateField(id) {
+            const field = document.getElementById(id);
+            const error = document.getElementById(`${id}-error`);
+            if (!field.value.trim()) {
+                error.style.display = "block";
+                return false;
+            } else {
+                error.style.display = "none";
+                return true;
+            }
+        }
+
+        function loadProfilePic(event) {
+            const preview = document.getElementById('preview-profile-pic');
+            preview.src = URL.createObjectURL(event.target.files[0]);
+            preview.style.display = 'block';
+        }
+
+        function generateResume() {
+            const requiredFields = ["name", "email", "phone", "city"];
+            let isValid = true;
+
+            requiredFields.forEach(fieldId => {
+                if (!validateField(fieldId)) {
+                    isValid = false;
+                }
+            });
+
+            if (isValid) {
+                ["name", "email", "phone", "city", "linkedin", "github", "facebook", "instagram"].forEach(id => {
+                    document.getElementById(`preview-${id}`).innerText = document.getElementById(id).value;
+                });
+                document.getElementById('resume-preview').style.display = 'block';
+                document.getElementById('print-btn').style.display = 'block';
+            }
+        }
+
+        function printResume() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
